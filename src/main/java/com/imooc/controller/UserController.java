@@ -27,7 +27,10 @@ public class UserController {
         } catch (AuthenticationException e) {
             return  e.getMessage();
         }
-        return "index";
+        if(subject.hasRole("admin")){
+            return "index";
+        }
+        return "没有权限哦";
     }
 
     @RequestMapping("index")

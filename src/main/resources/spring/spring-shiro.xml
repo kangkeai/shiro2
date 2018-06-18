@@ -19,7 +19,9 @@
     <!--创建SecurityManager对象-->
     <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
         <property name="realm" ref="realm" />
+        <property name="cacheManager" ref="ehcacheManager"/>
     </bean>
+
     <bean class="com.imooc.shiro.realm.CustomRealm" id="realm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
@@ -28,6 +30,7 @@
         <property name="hashAlgorithmName" value="md5"/>
         <property name="hashIterations" value="1" />
     </bean>
+
 
 
 </beans>

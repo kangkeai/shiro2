@@ -17,6 +17,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import sun.applet.Main;
 import sun.security.provider.MD5;
 
@@ -60,7 +61,7 @@ public class CustomRealm extends AuthorizingRealm{
      * 模拟数据
      */
     //模拟数据库
-    private String getPasswordByUserName(String userName) {
+    public String getPasswordByUserName(String userName) {
 //        Map<String,String> userMap = new HashMap<>(16);
 //        {
 //            //userMap.put("Mark","123456");
@@ -78,21 +79,24 @@ public class CustomRealm extends AuthorizingRealm{
     }
     //模拟数据库
     private Set<String> getPermissionsByUserName(String userName) {
-//        Set<String> sets = new HashSet<>();
-//        sets.add("delete");
-//        sets.add("update");
-//        return sets;
-        User user = userMapper.selectList(new EntityWrapper<User>()
-                .eq("user_name",userName))
-                .get(0);
-
-                user.getUserId();
-
-        return null;
+        System.out.println("从数据库中获取数据");
+        Set<String> sets = new HashSet<>();
+        sets.add("delete");
+        sets.add("update");
+        return sets;
+//        User user = userMapper.selectList(new EntityWrapper<User>()
+//                .eq("user_name",userName))
+//                .get(0);
+//
+//                user.getUserId();
+//
+//        return null;
     }
 
     //模拟数据库
     private Set<String> getRolesByUserName(String userName) {
+        System.out.println("从数据库中获取数据");
+
         Set<String> sets = new HashSet<>();
         sets.add("admin");
         sets.add("user");
